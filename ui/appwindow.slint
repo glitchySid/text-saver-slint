@@ -1,0 +1,51 @@
+import { Button, VerticalBox, LineEdit} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    in property <string> result : " ";
+    callback save-data(string);
+    background: #008080;
+    GridLayout{
+        padding: 50px;
+        spacing: 20px;
+        Row{
+            Text{
+                text: "Text Writer";
+                horizontal-alignment: center;
+                font-size: 24px;
+                font-weight: 900;
+            }
+        }
+        Row{
+        data := LineEdit {
+                font-size: 14px;
+                horizontal-alignment: center;
+                placeholder-text: "Enter text here";
+            }
+        }
+        Row{
+        Button {
+                text: "Store";
+                clicked => { 
+                    self.text = "stored"; 
+                    save-data(data.text);
+                }
+                    primary: true;
+                }
+        }
+        Row{
+            VerticalBox {
+                Rectangle {
+                    height: 200px;
+                    width: 200px;
+                    background: white;
+                    Text {
+                        color: black;
+                        font-size: 10px;
+                        font-weight: 400;
+                        text: root.result;
+                    }
+                }
+            }
+        }
+    }
+}
